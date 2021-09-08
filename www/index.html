@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<title>MB Challenge Calculator</title>
+		<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>
+	</head>
+	<body>
+		<div class="container">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="javascript: void(0);"><i class="fas fa-dumbbell"></i> MB Challenge Utility</a>
+				</div>
+			</nav>
+			
+			<div class="card card-body text-white bg-secondary mb-2" style='padding: 5px;'>
+				<div class='row'>
+					<div class='col'>
+						<div><i class="fas fa-bolt"></i> <span id='plan-display'>-</span></div>
+						<div><i class="fas fa-weight"></i> <span id='weight-display'>-</span> Lbs</div>
+						<div><i class="fas fa-percent"></i> <span id='bfp-display'>-</span> Body Fat</div>
+					</div>
+					<div class='col text-end'>
+						<div class="text-right"><span id='cal-display'>-</span> Calories</div>
+						<div class="text-right"><span id='carb-display'>-</span> Carbs</div>
+						<div class="text-right"><span id='fat-display'>-</span> Fat</div>
+						<div class="text-right"><span id='protein-display'>-</span> Protein</div>
+					</div>
+				</div>		
+			</div>
+			
+			<div class="d-grid gap-2" id="main-btns">
+				<button class="btn btn-primary" type="button" id="calc-button"><i class="fas fa-calculator"></i> Recalculate Macros</button>
+			</div>
+			
+			
+
+			
+		</div>
+		
+		<div class="modal" id='exercise_modal'>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Calorie Calculator</h5>
+					</div>
+					<div class="modal-body" id='exercise_modal_body'>
+						
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal" id='calc_modal'>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Calorie Calculator</h5>
+					</div>
+					<div class="modal-body">
+						
+						
+						<div class="card" id="step-1-card">
+							<div class="card-header">
+								Step 1: Body Fat
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Indicate your body fat percentage. </h5>
+								<p class="card-text">Use the reference chart below to estimate your body fat, if needed.</p>
+
+								<img src="img/body-fat-chart.png" class="img-fluid">
+
+								<hr>
+								<form id="step-1-form">
+									<div class="mb-3 mt-3">
+										<label for="body-fat-input" class="form-label"><b>Body Fat Percentage:</b></label>
+										<input type="text" class="form-control" id="body-fat-input">
+									</div>
+
+									<button type="submit" class="btn btn-primary">Next Step</a>
+								</form>
+							</div>
+						</div>
+
+						<div class="card" id="step-2-card" style="display:none;">
+							<div class="card-header">
+								Step 2: Weight
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Indicate your body weight. </h5>
+								<p class="card-text">Used to calculate your calorie requirements.</p>
+
+								<form id="step-2-form">
+									<div class="mb-3 mt-3">
+										<label for="body-weight-input" class="form-label"><b>Body Weight (lbs):</b></label>
+										<input type="text" class="form-control" id="body-weight-input">
+									</div>
+
+									<button type="submit" class="btn btn-primary">Next Step</a>
+								</form>
+							</div>
+						</div>
+						
+						<div class="card" id="step-3-card" style="display:none;">
+							<div class="card-header">
+								Step 3: Plan
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Select your plan. </h5>
+								<p class="card-text">Which plan are you following?</p>
+
+								<div class="d-grid gap-2">
+									<button class="btn btn-primary plan-btn" type="button" data-plan='shred'><i class="fas fa-bolt"></i> At Home Shredding</button>
+									<button class="btn btn-primary plan-btn" type="button" data-plan='shred'><i class="fas fa-bolt"></i> Gym Shredding</button>
+									<button class="btn btn-primary plan-btn" type="button" data-plan='recomp'><i class="fas fa-bolt"></i> At Home Tone & Tighten (Recomp)</button>
+									<button class="btn btn-primary plan-btn" type="button" data-plan='recomp'><i class="fas fa-bolt"></i> Gym Tone & Tighten (Recomp)</button>
+									<button class="btn btn-primary plan-btn" type="button" data-plan='build'><i class="fas fa-bolt"></i> Muscle Building</button>
+								</div>
+								
+							</div>
+						</div>
+						
+						<div class="card" id="step-4-card" style="display:none;">
+							<div class="card-header">
+								Step 4: Summary
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Results.</h5>
+								<p class="card-text">Your macros (in grams) and calorie goals.</p>
+
+								<table class='table'>
+									<tr>
+										<th>Calories</th>
+										<td id='res-cals'></td>
+									</tr>
+									<tr>
+										<th>Carbs</th>
+										<td id='res-carbs'></td>
+									</tr>
+									<tr>
+										<th>Fats</th>
+										<td id='res-fats'></td>
+									</tr>
+									<tr>
+										<th>Protein</th>
+										<td id='res-protein'></td>
+									</tr>
+								</table>
+								
+								<button class="btn btn-primary" type="button" id='calc-done'>Done</button>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+		<script src="js/script.js"></script>
+	</body>
+</html>
