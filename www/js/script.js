@@ -105,7 +105,7 @@ async function loadExercises(){
 			}
 			
 			exe.forEach(movement=>{
-				var url = "https://www.youtube.com/watch?v=RGqywVBvTw0";
+				var url = movement.demo;
 				var digits = url.match(/\/([^\/]+)\/?$/)[1];
 				while(digits.indexOf("=") !== -1) digits=digits.split("=")[1];
 				
